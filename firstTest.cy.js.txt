@@ -1,0 +1,20 @@
+describe('demoqa test', () => {
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    return false
+  })
+  it('passes', () => {
+    cy.visit('https://demoqa.com/webtables')
+    cy.get('#addNewRecordButton'). click()
+    cy.get('#firstName').type('John')
+    cy.get('#lastName').type('Doe')
+    cy.get('#userEmail').type('johndoe@example.com')
+    cy.get('#age').type('38')
+    cy.get('#salary').type('90000')
+    cy.get('#department').type('Engineering')
+    cy.get('#submit').click()
+    cy.contains('div[role="row"]', 'John')
+    .within(() => {
+      cy.get('[title="Delete"]').click()
+    })
+  })
+})
